@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and Display Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+
+        .header-text {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .background-image {
+            background-image: url('image/เสวมากอ้าาาาาาาา.gif'); /* ใส่ URL ของรูปภาพที่คุณต้องการใช้ */
+            background-size: cover; /* ปรับขนาดให้ครอบคลุมพื้นที่ทั้งหมด */
+            background-position: center; /* ปรับตำแหน่งของรูปภาพให้ตรงกลาง */
+            background-repeat: no-repeat; /* ป้องกันไม่ให้รูปภาพซ้ำ */
+            margin-left: 30%;
+            width: 700px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #displayImage {
+            position: absolute;
+            transform: translate(-200%,60%);
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            z-index: 2;
+        }
+
+        #displayImage2 {
+            position: absolute;
+            transform: translate(-150%, 280%);
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            z-index: 2;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-container input {
+            margin-right: 20px;
+        }
+
+        .image-container img {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="header-text">เว็ปตอกสดๆ</h1>
+
+    <div class="image-container">
+        <div>
+            <input type="file" id="fileInput1" accept="image/*">
+            <img id="displayImage" src="" alt="Uploaded Image">
+        </div>
+        <div>
+            <input type="file" id="fileInput2" accept="image/*">
+            <img id="displayImage2" src="" alt="Uploaded Image 2">
+        </div>
+    </div>
+
+    <div class="background-image"></div>
+
+    <script>
+        function handleFileUpload(inputId, imageId) {
+            document.getElementById(inputId).addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const displayImage = document.getElementById(imageId);
+                        displayImage.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        handleFileUpload('fileInput1', 'displayImage');
+        handleFileUpload('fileInput2', 'displayImage2');
+    </script>
+</body>
+</html>
